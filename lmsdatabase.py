@@ -5,21 +5,21 @@ import mysql.connector as mysql
 def insert():
     id = e_id.get()
     pname = e_pname.get()
-    rno = e_rno.get()
-    sdept =e_sdept.get()
+    tno = e_tno.get()
+    amount =e_amount.get()
     date = e_date.get()
-    if(id == "" or pname == "" or rno == "" or sdept == ""):
-        MessageBox.showinfo("ERROR, please fill all the information")
+    if(id == "" or pname == "" or tno == "" or amount == ""):
+        MessageBox.showinfo("ERROR", "please fill all the information")
     else:
         con = mysql.connect(host = "localhost", user="root", password = "Pizza@13", database = "lms")
         cursor = con.cursor()
-        cursor.execute("insert into detail values ('"+ id +"','"+ pname +"', '"+ rno +"', '"+ sdept +"','"+ date +"')")
+        cursor.execute("insert into detail values ('"+ id +"','"+ pname +"', '"+ tno +"', '"+ amount +"','"+ date +"')")
         cursor.execute("commit")
 
         e_id.delete(0,'end')
         e_pname.delete(0,'end')
-        e_rno.delete(0,'end')
-        e_sdept.delete(0,'end')
+        e_tno.delete(0,'end')
+        e_amount.delete(0,'end')
         e_date.delete(0,'end')
         show()
         MessageBox.showinfo("insert status", "inserted sucessfully")
@@ -37,8 +37,8 @@ def delete():
 
         e_id.delete(0,'end')
         e_pname.delete(0,'end')
-        e_rno.delete(0,'end')
-        e_sdept.delete(0,'end')
+        e_tno.delete(0,'end')
+        e_amount.delete(0,'end')
         e_date.delete(0,'end')
         show()
         MessageBox.showinfo("Delete status", "Deleted sucessfully")
@@ -47,22 +47,22 @@ def delete():
 def update():
     id = e_id.get()
     pname = e_pname.get()
-    rno = e_rno.get()
-    sdept =e_sdept.get()
+    tno = e_tno.get()
+    amount =e_amount.get()
     date = e_date.get()
 
-    if(id == "" or pname == "" or rno == "" or sdept == ""):
+    if(id == "" or pname == "" or tno == "" or amount == ""):
         MessageBox.showinfo("update status", "all information is compulsory for updation")
     else:
         con = mysql.connect(host = "localhost", user="root", password = "Pizza@13", database = "lms")
         cursor = con.cursor()
-        cursor.execute("update detail set name = '"+ pname +"', regno ='"+ rno +"', dept = '"+ sdept +"', date = '"+ date +"' where id = '"+ id +"' ")
+        cursor.execute("update detail set name = '"+ pname +"', regno ='"+ tno +"', dept = '"+ amount +"', date = '"+ date +"' where id = '"+ id +"' ")
         cursor.execute("commit")
 
         e_id.delete(0,'end')
         e_pname.delete(0,'end')
-        e_rno.delete(0,'end')
-        e_sdept.delete(0,'end')
+        e_tno.delete(0,'end')
+        e_amount.delete(0,'end')
         e_date.delete(0,'end')
 
         show()
@@ -81,8 +81,8 @@ def get():
         for row in rows:
         #    e_id.insert(0,row[1])
             e_pname.insert(0,row[1])
-            e_rno.insert(0,row[2])
-            e_sdept.insert(0,row[3])
+            e_tno.insert(0,row[2])
+            e_amount.insert(0,row[3])
             e_date.insert(0,row[4])
         con.close()
 #        MessageBox.showinfo("Delete status", "Deleted sucessfully")
@@ -91,8 +91,8 @@ def get():
 def clear():
     e_id.delete(0,'end')
     e_pname.delete(0,'end')
-    e_rno.delete(0,'end')
-    e_sdept.delete(0,'end')
+    e_tno.delete(0,'end')
+    e_amount.delete(0,'end')
     e_date.delete(0,'end')
     MessageBox.showinfo("clear status", "all fields are clear")
 
@@ -133,11 +133,11 @@ id.place(x= 20 , y=70)
 pname = Label(root, text = "Name : ", font = ("bold", 15))
 pname.place(x= 20 , y=100)
 
-rno = Label(root, text = "Transaction no : ", font = ("bold", 15))
-rno.place(x= 20 , y=130)
+tno = Label(root, text = "Transaction no : ", font = ("bold", 15))
+tno.place(x= 20 , y=130)
 
-sdept = Label(root, text = "Amount : ", font = ("bold", 15))
-sdept.place(x= 20 , y=160)
+amount = Label(root, text = "Amount : ", font = ("bold", 15))
+amount.place(x= 20 , y=160)
 
 date = Label(root, text ="Date : ", font =("bold",15))
 date.place(x=20, y =190)
@@ -147,11 +147,11 @@ e_id.place(x=180, y=70)
 e_pname = Entry(bd=4)
 e_pname.place(x=180, y=100)
 
-e_rno = Entry(bd=4)
-e_rno.place(x=180, y=130)
+e_tno = Entry(bd=4)
+e_tno.place(x=180, y=130)
 
-e_sdept = Entry(bd=4)
-e_sdept.place(x=180, y=160)
+e_amount = Entry(bd=4)
+e_amount.place(x=180, y=160)
 
 e_date = Entry(bd=4)
 e_date.place(x=180, y= 190)
