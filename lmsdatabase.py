@@ -8,8 +8,9 @@ def insert():
     tno = e_tno.get()
     amount =e_amount.get()
     date = e_date.get()
-    if(id == "" or pname == "" or tno == "" or amount == ""):
-        MessageBox.showinfo("ERROR", "please fill all the information")
+    id = str(id)
+    if(id == "" or pname == "" or tno == "" or amount == "" or len(id) > 9):
+        MessageBox.showinfo("ERROR", "please fill all the information or check the policy no length")
     else:
         con = mysql.connect(host = "localhost", user="root", password = "Pizza@13", database = "lms")
         cursor = con.cursor()
@@ -123,9 +124,10 @@ def newwindow():
 
 root = Tk()
 root.geometry("900x400")
-root.title("Library management system")
+root.title("LIC DATA ENTRY")
+root.configure(bg='orange')
 
-lbl = Label(root, text="LIC of India",fg=("Blue"), font=("helvetica",25,"bold"))
+lbl = Label(root, text="LIC of India",bg=('yellow'),fg=("Blue"), font=("helvetica",25,"bold"))
 lbl.place(x=300, y = 5)
 id = Label(root, text = "Policy no : ", font = ("bold", 15))
 id.place(x= 20 , y=70)
@@ -179,5 +181,6 @@ nwindow = Button(root, text = "About  Us", font=("italic",10), bg="Red", command
 nwindow.place(x = 205, y =300 )
 
 #root.resizable(0, 0)
+
 
 mainloop()
